@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "616813608759",
+    "project_id": "college-recruitment-app",
+    "storage_bucket": "college-recruitment-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:616813608759:android:a512eaa9d652edb37464b2",
+        "android_client_info": {
+          "package_name": "com.campusrecruitmentsystem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "616813608759-hdl952gfo3ivr5kje8ej7opbu39m806f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmz1pl87ApffapAGIFjtNS3FLcq_IuXxQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "616813608759-hdl952gfo3ivr5kje8ej7opbu39m806f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
