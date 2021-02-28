@@ -106,6 +106,7 @@ export default function Student(props) {
           email,
           mobile,
           user,
+          type: "student",
         })
           .then(function () {
             setName("")

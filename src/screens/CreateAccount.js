@@ -24,7 +24,7 @@ import {
 import auth from "@react-native-firebase/auth";
 import database from "@react-native-firebase/database";
 
-export default function Admin(props) {
+export default function Signup(props) {
   const cityInput = useRef();
   const emailInput = useRef();
   const mobileInput = useRef();
@@ -32,13 +32,16 @@ export default function Admin(props) {
   const confirmInput = useRef();
 
   const [name,setName] = useState("")
+  const [city,setCity] = useState("")
   const [email,setEmail] = useState("")
+  const [mobile,setMobile] = useState("")
   const [password,setPassword] = useState("")
   const [confirmPassword,setConfirmPassword] = useState("")
 
   const [loading,setLoading] = useState(false)
 
   const nameValidation = /([A-Za-z])\w/;
+  const cityValidation = /([A-Za-z])\w/;
   const emailValidation = /^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/;
   const passwordValidation = /^[A-Za-z[0-9]\w{7,}$/;
 
@@ -51,11 +54,25 @@ export default function Admin(props) {
         Alert.alert("Error","Please Enter Valid Name!");
       }
     }
+    else if (cityValidation.test(city) === false) {
+      if (Platform.OS === 'android') {
+        ToastAndroid.show("Please Enter Valid City Name!", ToastAndroid.SHORT)
+      } else {
+        Alert.alert("Error","Please Enter Valid City Name!");
+      }
+    }
     else if (emailValidation.test(email) === false) {
       if (Platform.OS === 'android') {
         ToastAndroid.show("Please Enter Valid Email Address!", ToastAndroid.SHORT)
       } else {
         Alert.alert("Error","Please Enter Valid Email Address!");
+      }
+    }
+    else if(mobile.length < 11){
+      if (Platform.OS === 'android') {
+        ToastAndroid.show("Please Enter Valid Mobile Number!", ToastAndroid.SHORT)
+      } else {
+        Alert.alert("Error","Please Enter Valid Mobile Number!");
       }
     }
     else if (passwordValidation.test(password) === false){
@@ -83,19 +100,22 @@ export default function Admin(props) {
     auth().createUserWithEmailAndPassword(email, password)
       .then((e) => {
         let user = e.user.uid
-        database().ref('College_Recruitment_Admins/' + user).set({
+        database().ref('Blood_Bank_Users/' + user).set({
           name,
+          city,
           email,
+          mobile,
           user,
-          type: "admin"
         })
           .then(function () {
             setName("")
+            setCity("")
             setEmail("")
+            setMobile("")
             setPassword("")
             setConfirmPassword("")
             setLoading(false)
-            // props.navigation.navigate("Dashboard")
+            props.navigation.replace('Home')
           })
           .catch(function (error) {
             setLoading(false)
@@ -127,10 +147,8 @@ export default function Admin(props) {
   };
 
   return (
-    <Container style={{justifyContent:"center",backgroundColor: "#e5e5e5",flex:1}}>
-    <KeyboardAvoidingView >
-
-    {/* behavior='height' keyboardVerticalOffset={70} */}
+    <Container style={{justifyContent:"center"}}>
+    <KeyboardAvoidingView behavior='height' keyboardVerticalOffset={70}>
       <ScrollView keyboardShouldPersistTaps='handled'>
       <Form>
         <Item stackedLabel>
@@ -145,6 +163,22 @@ export default function Admin(props) {
             autoCorrect={false}
             onChangeText={(e)=>{setName(e)}}
             value={name}
+            onSubmitEditing={() => cityInput.current.focus()}
+          />
+        </Item>
+        <Item stackedLabel>
+          <Label>City</Label>
+          <TextInput
+            keyboardType="default"
+            selectionColor='rgba(0, 0, 0, 0.5)'
+            style={styles.inputs}
+            underlineColorAndroid="transparent"
+            ref={cityInput}
+            returnKeyType="next"
+            blurOnSubmit={false}
+            autoCorrect={false}
+            onChangeText={(e)=>{setCity(e)}}
+            value={city}
             onSubmitEditing={() => emailInput.current.focus()}
           />
         </Item>
@@ -161,6 +195,21 @@ export default function Admin(props) {
             autoCapitalize='none'
             onChangeText={(e)=>{setEmail(e)}}
             value={email}
+            onSubmitEditing={() => mobileInput.current.focus()}
+          />
+        </Item>
+        <Item stackedLabel>
+          <Label>Mobile</Label>
+          <TextInput
+            keyboardType="numeric"
+            selectionColor='rgba(0, 0, 0, 0.5)'
+            style={styles.inputs}
+            underlineColorAndroid="transparent"
+            ref={mobileInput}
+            returnKeyType="next"
+            blurOnSubmit={false}
+            onChangeText={(e)=>{setMobile(e)}}
+            value={mobile}
             onSubmitEditing={() => passwordInput.current.focus()}
           />
         </Item>

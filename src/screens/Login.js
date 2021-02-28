@@ -55,7 +55,9 @@ export default function Login(props) {
           setEmail('');
           setPassword('');
           setLoading(false);
-          props.navigation.navigate('Dashboard');
+          props.navigation.replace('Home');
+
+      
         }, 100);
       })
       .catch((error) => {

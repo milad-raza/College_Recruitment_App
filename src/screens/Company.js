@@ -106,6 +106,7 @@ export default function Company(props) {
           email,
           mobile,
           user,
+          type: "company",
         })
           .then(function () {
             setName("")
