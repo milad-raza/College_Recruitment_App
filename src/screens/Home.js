@@ -19,9 +19,6 @@ function Home(props) {
     return auth().onAuthStateChanged(function (user) {
       if (user) {
         props.ChangeLogin(true);
-        // props.ChangeUser(user.uid);
-        console.log(user.uid);
-
         database()
           .ref(`College_Recruitment_Students/${user.uid}`)
           .once("value")

@@ -44,7 +44,7 @@ function StudentUpdateProfile(props) {
 
   useEffect(() => {
     if (login === false) {
-      props.navigation.replace("Home");
+      props.navigation.navigate("Home");
     }
   }, [login]);
 
