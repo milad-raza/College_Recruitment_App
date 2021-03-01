@@ -37,23 +37,23 @@ function Home(props) {
                       .once("value")
                       .then((data) => {
                         if (data.val() !== null) {
-                          props.navigation.replace("Admin Dashboard");
+                          props.navigation.navigate("Admin Dashboard");
                           setTimeout(() => {
                           setLoading(false);                            
                           }, 500);
                         }
                       });
                   } else {
-                    props.navigation.replace("Company Dashboard");
+                    props.navigation.navigate("Company Dashboard");
                     setTimeout(() => {
                         setLoading(false);                            
                         }, 500);
                   }
                 });
             } else {
-              props.navigation.replace("Student Dashboard");
+              props.navigation.navigate("Student Dashboard");
               setTimeout(() => {
-                setLoading(false);                            
+              setLoading(false);    
                 }, 500);
             }
           })

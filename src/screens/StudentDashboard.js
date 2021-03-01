@@ -5,18 +5,34 @@ import {
   StyleSheet,
   ImageBackground,
   TouchableOpacity,
+  BackHandler
 } from "react-native";
 
 import { connect } from "react-redux";
-
+import { useFocusEffect } from '@react-navigation/native';
 function StudentDashboard(props) {
+
   const login = props.login;
 
   useEffect(() => {
     if (login === false) {
-      props.navigation.replace("Home");
+      props.navigation.navigate("Home");
     }
   }, [login]);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+        return true;
+      };
+      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+      return () =>
+        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    })
+  );
+
+ 
 
   return (
     <View style={styles.cont}>
